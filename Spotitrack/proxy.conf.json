@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://accounts.spotify.com/authorize",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "https://localhost:4200"
+
+    }
+  }
+}

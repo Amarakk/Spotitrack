@@ -68,6 +68,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options":{},
           "configurations": {
             "production": {
               "browserTarget": "Spotitrack:build:production"
