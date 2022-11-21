@@ -5,7 +5,7 @@ export const environment = {
 export const SpotifyConfiguration = {
   clientId: '48c11a4c27874137bf970a2fd475cd9d',
   authEndpoint: 'https://accounts.spotify.com/authorize',
-  redirectUrl: 'http://localhost:4200/',
+  redirectUrl: 'https://spotitrack-app.herokuapp.com/',
   scopes: [
     "ugc-image-upload", // upload de imagens
     "user-read-playback-state", // ler estado do player do usuario
