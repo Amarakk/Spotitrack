@@ -54,19 +54,15 @@ getAccessToken(){
 
 async getUsername(){
   this.setAccessToken(localStorage.getItem('token'))
- this.myName =  (await this.spotify.getMe()).display_name
-  console.log(this.myName)
+  this.myName = await this.spotify.getMe()
+  return this.myName
 
-  
 }
 
 setAccessToken(token: string) {
   console.log(token)
   this.spotify.setAccessToken(token);
   localStorage.setItem('token', token);
-  this.spotify.getMyTopArtists()
-
-  // this.spotify.skipToNext()
   }
 
 
@@ -74,17 +70,10 @@ async getAlbunsFromArtist(artist: string) {
   this.spotify.getArtistAlbums(artist)
 }
 
-async getUserImage(){
-  console.log('oi')
-  console.log((await this.spotify.getMe()))
-  this.myImage = (await this.spotify.getMe()).images[0].url
-  return (await this.spotify.getMe()).images[0].url
-}
 
 async getTopArtists(){
-  console.log(await this.spotify.getMyTopArtists())
-  this.myArtist = (await this.spotify.getMyTopArtists())
-
+  this.myArtist = await this.spotify.getMyTopArtists()
+  return this.myArtist
 }
 
   

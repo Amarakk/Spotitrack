@@ -9,7 +9,7 @@ export const environment = {
 export const SpotifyConfiguration = {
   clientId: '48c11a4c27874137bf970a2fd475cd9d',
   authEndpoint: 'https://accounts.spotify.com/authorize',
-  redirectUrl: 'http://localhost:4200/',
+  redirectUrl: 'https://localhost:8080/',
   scopes: [
     "ugc-image-upload", // upload de imagens
     "user-read-playback-state", // ler estado do player do usuario
