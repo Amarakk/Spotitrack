@@ -8,11 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav'
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { LoginScreenComponent } from './pages/login-screen/login-screen.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainScreenComponent
+    MainScreenComponent,
+    LoginScreenComponent
 
   ],
   imports: [
@@ -22,7 +25,8 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,6 +16,7 @@ export class SpotifyService implements OnInit {
   private url = 'https://api.spotify.com/v1/'; 
 
   private headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
     'Content-Type': '*/*',
   });
 
@@ -30,7 +31,7 @@ export class SpotifyService implements OnInit {
   }
 
 async login(){
-  await this.http.get('https://accounts.spotify.com/authorize?'+`&code=user-read-private&client_id=${this.clientId}&response_type=code&redirect_uri=${this.redirect_uri}`).subscribe(
+  await this.http.get('https://accounts.spotify.com/authorize?'+`&code=user-read-private&client_id=${this.clientId}&response_type=code&redirect_uri=${this.redirect_uri}` , {headers: this.headers}).subscribe(
     (data) => {
       console.log(data);
     }
