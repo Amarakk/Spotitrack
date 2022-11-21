@@ -4,53 +4,89 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ActivatedRoute } from '@angular/router';
 
+import { SpotifyConfiguration } from '../../environments/environment';
+
+import Spotify from 'spotify-web-api-js';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class SpotifyService implements OnInit {
-  private clientSecret="ecc7d29beac94666a6d2006c57d10bf2"
-  private clientId="68d5f35a3490488abf0f4418be174135"
-  private redirect_uri = 'https://localhost:4200/';
+export class SpotifyService {
+  private authEndpoint = `${SpotifyConfiguration.authEndpoint}?`;
+  private clientId= `client_id=${SpotifyConfiguration.clientId}&`
+  private redirect_uri= `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
+  private scopes = `scope=${SpotifyConfiguration.scopes.join('%20')}&`; 
+  private response_type = 'response_type=token&show_dialog=true&';
   
-  private url = 'https://api.spotify.com/v1/'; 
+  public myName: any
+  public myImage: any
+  public myArtist: any
+  spotify: Spotify.SpotifyWebApiJs = null;
 
-  private headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': '*/*',
-  });
 
+
+  
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
-    this.login()
-    
+    private route: ActivatedRoute,
+  ) { 
+    this.spotify = new Spotify();
   }
 
-async login(){
-  await this.http.get('https://accounts.spotify.com/authorize?'+`&code=user-read-private&client_id=${this.clientId}&response_type=code&redirect_uri=${this.redirect_uri}` , {headers: this.headers}).subscribe(
-    (data) => {
-      console.log(data);
-    }
-  );
+
+login(){
+  console.log(this.authEndpoint + this.clientId + this.redirect_uri + this.scopes + this.response_type)
+  return(this.authEndpoint+this.clientId+this.redirect_uri+this.scopes+this.response_type)
 }
+
+getAccessToken(){
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1).split('&')
+    console.log(hash[0].split('=')[1])
+    return(hash[0].split('=')[1])
+  }
+  else{
+    return null
+  }
+}
+
+
+async getUsername(){
+  this.setAccessToken(localStorage.getItem('token'))
+ this.myName =  (await this.spotify.getMe()).display_name
+  console.log(this.myName)
+
+  
+}
+
+setAccessToken(token: string) {
+  console.log(token)
+  this.spotify.setAccessToken(token);
+  localStorage.setItem('token', token);
+  this.spotify.getMyTopArtists()
+
+  // this.spotify.skipToNext()
+  }
+
 
 async getAlbunsFromArtist(artist: string) {
-
-  const url = `${this.url}search?q=${artist}&type=album&limit=50`;
-  const  headers = new HttpHeaders({
-    'Token':`Bearer AQBD6HVzvkbDD_xMYCBwNpcRyY7lt6nIcn8O1HCLI_vAie4LzHQu5Du9wClKe2mQC679LBqVHbAAO_MDsOaSHkOMbqO15zo3x3UctQ62sFZ1gm1Y_jeg9f9hq6jdYFXKuOFtqQvSFYST-mTDyWsgNfdHW3qzdFhkqlE`
-})
-  const response = await this.http.get(url, { headers:headers }).subscribe(
-    (data) => {
-      console.log(data);
-    }
-  );
-  return response;
+  this.spotify.getArtistAlbums(artist)
 }
+
+async getUserImage(){
+  console.log('oi')
+  console.log((await this.spotify.getMe()))
+  this.myImage = (await this.spotify.getMe()).images[0].url
+  return (await this.spotify.getMe()).images[0].url
+}
+
+async getTopArtists(){
+  console.log(await this.spotify.getMyTopArtists())
+  this.myArtist = (await this.spotify.getMyTopArtists())
+
+}
+
   
 
 }

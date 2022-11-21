@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/shared/services/spotify.service';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 
 @Component({
@@ -10,23 +10,19 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class LoginScreenComponent implements OnInit {
   private code: any
+  public user:any ;
 
   constructor(
     private spotifyService: SpotifyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
+
 
   ) { }
 
   ngOnInit(): void {
  
-      this.code = this.route.snapshot.queryParamMap.get('code');
-      console.log(this.code);
-
-    if(!this.code){
-     console.log("error")
-      this.spotifyService.login()
-    }
-
+    this.getToken()
 
   }
 
@@ -35,6 +31,16 @@ export class LoginScreenComponent implements OnInit {
   }
   
   login(){
-  this.spotifyService.login()
+    window.location.href =  this.spotifyService.login();
+  }
+  async getToken(){
+    const token = this.spotifyService.getAccessToken();
+    if(!!token){
+      this.spotifyService.setAccessToken(token)
+      this.user = this.spotifyService.getUsername()
+      this.router.navigate(['/main'])
+    }
+
+    
   }
 }

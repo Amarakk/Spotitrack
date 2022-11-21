@@ -11,30 +11,20 @@ import { SpotifyService } from 'src/shared/services/spotify.service';
 export class MainScreenComponent implements OnInit {
   private code: any
   public lista = [1,2,3,4,5,6,7,8,9,0]
+  popupUrl: any;
+  public user:any ;
+  public image: any;
   constructor(
-    private spotifyService: SpotifyService,
+    public spotifyService: SpotifyService,
     private route: ActivatedRoute
 
   ) { }
 
-  ngOnInit(): void {
- 
-      this.code = this.route.snapshot.queryParamMap.get('code');
-      console.log(this.code);
-
-    if(!this.code){
-     console.log("error")
-      this.spotifyService.login()
-    }
-
-
+  ngOnInit() {
+    this.spotifyService.getUsername()
+    this.spotifyService.setAccessToken(localStorage.getItem('token'))
+    this.spotifyService.getUserImage();
+    this.spotifyService.getTopArtists()
   }
 
-  getAlbuns(){
-    this.spotifyService.getAlbunsFromArtist("Metallica");
-  }
-  
-  login(){
-  this.spotifyService.login()
-  }
 }

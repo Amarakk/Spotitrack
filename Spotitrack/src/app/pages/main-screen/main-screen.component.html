@@ -1,10 +1,13 @@
-<div >
+<div class="container">
+    <div class="profile-info">
+        <p class="title">Bem-Vindo(a) {{this.spotifyService.myName}}!</p>
+        <img class="user-image" src={{this.spotifyService.myImage}}/>
+    </div>
+    <div class="display-info" >
+        <p class="subtitle"> Seu artista mais ouvido é</p>
+        <img class="artist-image" src={{this.spotifyService.myArtist.items[0].images[0].url}}/>
+        <p class="artist-name">{{this.spotifyService.myArtist.items[0].name}}</p>
+    </div>
 
-<button (click)="getAlbuns()">
-    clique aqui
-</button>
-<button (click)="login()">
-    login
-</button>
 
 </div>
