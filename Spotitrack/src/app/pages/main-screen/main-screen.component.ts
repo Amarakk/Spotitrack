@@ -16,6 +16,8 @@ export class MainScreenComponent implements OnInit {
   public image: any;
   public myArtists: any;
   public topThreeArtists: any;
+  public myTracks: any;
+  public topFiveTracks: any;
 
   constructor(
     public spotifyService: SpotifyService,
@@ -28,8 +30,8 @@ export class MainScreenComponent implements OnInit {
   ngOnInit() {
     this.spotifyService.setAccessToken(localStorage.getItem('token'))
     this.getUsername();
-    this.getTopArtists()
-    
+    this.getTopArtists();
+    this.getTopTracks();
   }
 
   getTopArtists(){
@@ -38,6 +40,17 @@ export class MainScreenComponent implements OnInit {
       this.topThreeArtists = this.myArtists.items.slice(0,3)
     })
 
+  }
+
+  getTopTracks(){
+    this.spotifyService.getTopTracks().then((data) => {
+      this.myTracks = data
+      this.topFiveTracks = this.myTracks.items.slice(0,5)
+    })
+  }
+
+  playTrack(track:string){
+    this.spotifyService.playTrack(track)
   }
 
 

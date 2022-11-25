@@ -22,6 +22,7 @@ export class SpotifyService {
   public myName: any
   public myImage: any
   public myArtist: any
+  public myTracks: any
   spotify: Spotify.SpotifyWebApiJs = null;
 
 
@@ -72,10 +73,24 @@ async getAlbunsFromArtist(artist: string) {
 
 
 async getTopArtists(){
-  this.myArtist = await this.spotify.getMyTopArtists()
+  this.myArtist = await this.spotify.getMyTopArtists({
+    time_range: 'short_term',
+  })
   return this.myArtist
 }
 
-  
+async getTopTracks(){
+  this.myTracks = this.spotify.getMyTopTracks({
+    time_range: 'short_term',
+  })
+  return this.myTracks
+}
+
+async playTrack(track: string){
+  this.spotify.play({
+    uris: [track]
+  })
+}
+
 
 }

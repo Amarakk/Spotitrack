@@ -1,26 +1,68 @@
 <div class="container">
-    <div class="profile-info">
-        <p class="title">Bem-Vindo(a) {{user.display_name}}!</p>
-        <img class="user-image" src={{image}}/>
-    </div>
-    <div class="display-info" >
-        <p class="subtitle"> Seus artistas mais ouvidos são:</p>
-        <div class="top-artist-container" *ngFor="let artist of topThreeArtists">
-            <img class="artist-image" src={{artist.images[0].url}}/>
-            <div class="top-artist-info">
-                <p class="artist-name">{{artist.name}}</p>
-                <p class="artist-genre">{{artist.genres[0]}}</p>
-                <p class="artist-followers">  {{artist.followers.total}} seguidores</p>
+    <div class="page">
+        <div class="profile-info">
+            <p class="title">Bem-Vindo(a) {{user.display_name}}!</p>
+            <img class="user-image" src={{image}}/>
+        </div>
+        
+        <div class="display-info" >
+            <p class="subtitle"> Seus artistas mais ouvidos no último mês:</p>
+            <div class="top-artist-container" *ngFor="let artist of topThreeArtists; index as i">
+                <img class="artist-image" src={{artist.images[0].url}}/>
+                <div class="top-artist-info">
+                    <p class="artist-name">{{artist.name}}</p>
+                    <p class="artist-genre">{{artist.genres[0]}}</p>
+                    <p class="artist-followers">  {{artist.followers.total}} seguidores</p>
+                </div>
+    
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                      <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(29, 185, 84,0.7)" />
+                      </g>
+                    </svg>
             </div>
+        </div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+              <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+              <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(29, 185, 84,0.7)" />
+              <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(29, 185, 84,0.5)" />
+              <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(29, 185, 84,0.3)" />
+              </g>
+            </svg>
+    </div>
 
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                  <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                  <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(29, 185, 84,0.7)" />
-                  </g>
-                </svg>
+    <div class="page">
+
+        <div class="display-info" >
+            <p class="subtitle"> Suas músicas mais ouvidas no último mês foram:</p>
+            <div class="top-artist-container" *ngFor="let track of topFiveTracks">
+                <div class="image-container"> 
+                    <div class="play-button" (click)="playTrack(track.uri)">
+                        <svg class="play-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
+                        </svg> 
+                    </div>
+                    <img class="track-image"  src={{track.album.images[0].url}}/>
+                </div>
+                <div class="top-artist-info">
+                    <p class="artist-name">{{track.name}}</p>
+                    <p class="artist-genre">{{track.artists[0].name}}</p>
+                </div>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                      <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(29, 185, 84,0.7)" />
+                      </g>
+                    </svg>
+            </div>
         </div>
     </div>
 </div>
