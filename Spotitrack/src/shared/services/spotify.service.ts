@@ -23,6 +23,7 @@ export class SpotifyService {
   public myImage: any
   public myArtist: any
   public myTracks: any
+  public relatedArtist: any
   spotify: Spotify.SpotifyWebApiJs = null;
 
 
@@ -92,5 +93,8 @@ async playTrack(track: string){
   })
 }
 
-
+async getRelatedArtist(artist_Id: string){
+  this.relatedArtist = await this.spotify.getArtistRelatedArtists(artist_Id)
+  return this.relatedArtist
+}
 }
