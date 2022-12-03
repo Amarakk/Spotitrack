@@ -10,7 +10,7 @@
             <div class="top-artist-container" *ngFor="let artist of topThreeArtists; index as i">
                 <img class="artist-image" src={{artist.images[0].url}}/>
                 <div class="top-artist-info">
-                    <p class="artist-name">{{artist.name}}</p>
+                    <p class="artist-name" (click)="seeDetails(artist,'artist')">{{artist.name}}</p>
                     <p class="artist-genre">{{artist.genres[0]}}</p>
                     <p class="artist-followers">  {{artist.followers.total}} seguidores</p>
                 </div>
@@ -43,7 +43,7 @@
             <p class="subtitle"> Suas músicas mais ouvidas no último mês foram:</p>
             <div class="top-artist-container" *ngFor="let track of topFiveTracks">
                 <div class="image-container"> 
-                    <div class="play-button" (click)="playTrack(track.uri)">
+                    <div class="play-button" (click)="playTrack(track)">
                         <svg class="play-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                             <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
                         </svg> 
@@ -51,7 +51,7 @@
                     <img class="track-image"  src={{track.album.images[0].url}}/>
                 </div>
                 <div class="top-artist-info">
-                    <p class="artist-name">{{track.name}}</p>
+                    <p class="artist-name" (click)="seeDetails(track,'track')">{{track.name}}</p>
                     <p class="artist-genre">{{track.artists[0].name}}</p>
                 </div>
                 <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
