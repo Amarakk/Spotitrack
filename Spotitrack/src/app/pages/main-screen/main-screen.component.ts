@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/shared/services/spotify.service';
-
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { DetailsComponent } from 'src/shared/components/details/details.component';
 
 @Component({
   selector: 'app-main-screen',
@@ -22,7 +23,8 @@ export class MainScreenComponent implements OnInit {
 
   constructor(
     public spotifyService: SpotifyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
 
   ) { 
 
@@ -61,8 +63,10 @@ export class MainScreenComponent implements OnInit {
     })
   }
 
-  playTrack(track:string){
-    this.spotifyService.playTrack(track)
+  playTrack(track:any){
+
+      this.spotifyService.playTrack(track)
+    
   }
 
 
@@ -71,5 +75,13 @@ export class MainScreenComponent implements OnInit {
       this.user = data
       this.image = this.user.images[0].url
     })
+  }
+
+  seeDetails(obj:any, type:string){
+    this.dialog.open(DetailsComponent, {
+      data: {
+        obj: obj,
+        type: type
+      }})
   }
 }

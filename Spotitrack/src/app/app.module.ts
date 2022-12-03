@@ -10,12 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoginScreenComponent } from './pages/login-screen/login-screen.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DetailsComponent } from '../shared/components/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainScreenComponent,
-    LoginScreenComponent
+    LoginScreenComponent,
+    DetailsComponent
 
   ],
   imports: [
@@ -27,6 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
     HttpClientModule,
     RouterModule,
     MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
