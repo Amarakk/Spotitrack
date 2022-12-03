@@ -17,6 +17,7 @@ export class MainScreenComponent implements OnInit {
   public image: any;
   public myArtists: any;
   public topThreeArtists: any;
+  public topThreeRelatedArtist: any;
   public myTracks: any;
   public topFiveTracks: any;
 
@@ -40,8 +41,19 @@ export class MainScreenComponent implements OnInit {
    this.spotifyService.getTopArtists().then((data) => {
       this.myArtists = data
       this.topThreeArtists = this.myArtists.items.slice(0,3)
+      this.getRelatedArtists(this.topThreeArtists)
     })
 
+  }
+
+  async getRelatedArtists(topThreeArtists: any){
+    const artistId = topThreeArtists.map((element: { id: string; }) => element.id)
+    let listOfArtist: any[] = []
+  
+    artistId.forEach((artist: string) =>  this.spotifyService.getRelatedArtist(artist).then((data) => {
+      listOfArtist.push(data.artists.slice(0,3))
+    }))
+    this.topThreeRelatedArtist = listOfArtist
   }
 
   getTopTracks(){

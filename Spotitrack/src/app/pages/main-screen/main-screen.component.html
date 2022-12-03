@@ -10,7 +10,7 @@
             <div class="top-artist-container" *ngFor="let artist of topThreeArtists; index as i">
                 <img class="artist-image" src={{artist.images[0].url}}/>
                 <div class="top-artist-info">
-                    <p class="artist-name" (click)="seeDetails(artist,'artist')">{{artist.name}}</p>
+                    <p class="artist-name" (click)="seeDetails([artist,topThreeRelatedArtist[i]],'artist')">{{artist.name}}</p>
                     <p class="artist-genre">{{artist.genres[0]}}</p>
                     <p class="artist-followers">  {{artist.followers.total}} seguidores</p>
                 </div>
