@@ -14,14 +14,14 @@
 
 <div *ngIf="data.type === 'artist' "class="container">
     <div class="profile">
-        <img class="artist-image" src={{data.obj.images[0].url}}/>
+        <img class="artist-image" src={{data.obj[0].images[0].url}}/>
         <h1>{{data.obj.name}}</h1>
-        <h2> Seguidores: {{data.obj.followers.total}}</h2>
-        <h2> Gênero: {{data.obj.genres}}</h2>
+        <h2> Seguidores: {{data.obj[0].followers.total}}</h2>
+        <h2> Gênero: {{data.obj[0].genres}}</h2>
     </div>
     <div class="related">
         <h2>Artistas Relacionados</h2>
-        <div *ngFor="let artist of data.obj.relatedArtists">
+        <div *ngFor="let artist of data.obj[1]">
             <img class="artist-image" src={{artist.images[0].url}}/>
             <h2>{{artist.name}}</h2>
         </div>
