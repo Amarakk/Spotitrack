@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, TitleStrategy } from '@angular/router';
 
 import { SpotifyConfiguration } from '../../environments/environment';
 
@@ -23,7 +23,9 @@ export class SpotifyService {
   public myImage: any
   public myArtist: any
   public myTracks: any
+  public relatedArtist: any
   spotify: Spotify.SpotifyWebApiJs = null;
+  audio = new Audio();
 
 
 
@@ -33,6 +35,7 @@ export class SpotifyService {
     private route: ActivatedRoute,
   ) { 
     this.spotify = new Spotify();
+
   }
 
 
@@ -86,11 +89,23 @@ async getTopTracks(){
   return this.myTracks
 }
 
-async playTrack(track: string){
-  this.spotify.play({
-    uris: [track]
-  })
+async playTrack(track:any){
+  this.audio.pause();
+    this.spotify.play({
+      uris: [track.uri]
+    }).then(() => {
+      console.log('Playing now!');
+    }).catch((err) => {
+    console.log(err)
+
+    this.audio.src = track.preview_url;
+    this.audio.volume = 0.1;
+    this.audio.play();
+    });
 }
 
-
+async getRelatedArtist(artist_Id: string){
+  this.relatedArtist = await this.spotify.getArtistRelatedArtists(artist_Id)
+  return this.relatedArtist
+}
 }

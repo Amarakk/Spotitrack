@@ -1,0 +1,29 @@
+<div *ngIf="data.type === 'track' "class="container">
+    <div class="profile">
+            <img class="artist-image" src={{data.obj.album.images[0].url}}/>
+            <h2>{{data.obj.name}}</h2>
+            <h1>{{data.obj.artists[0].name}}</h1>
+    </div>
+    <div class="info">
+        <h2>Álbum: {{data.obj.album.name}}</h2>
+        <h2>Data de lançamento: {{data.obj.album.release_date}}</h2>
+        <h2>Popularidade: {{data.obj.popularity}}</h2>
+    </div>
+</div>
+
+
+<div *ngIf="data.type === 'artist' "class="container">
+    <div class="profile">
+        <img class="artist-image" src={{data.obj[0].images[0].url}}/>
+        <h1>{{data.obj.name}}</h1>
+        <h2> Seguidores: {{data.obj[0].followers.total}}</h2>
+        <h2> Gênero: {{data.obj[0].genres}}</h2>
+    </div>
+    <div class="related">
+        <h2>Artistas Relacionados</h2>
+        <div *ngFor="let artist of data.obj[1]">
+            <img class="artist-image" src={{artist.images[0].url}}/>
+            <h2>{{artist.name}}</h2>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/shared/services/spotify.service';
-
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { DetailsComponent } from 'src/shared/components/details/details.component';
 
 @Component({
   selector: 'app-main-screen',
@@ -16,12 +17,14 @@ export class MainScreenComponent implements OnInit {
   public image: any;
   public myArtists: any;
   public topThreeArtists: any;
+  public topThreeRelatedArtist: any;
   public myTracks: any;
   public topFiveTracks: any;
 
   constructor(
     public spotifyService: SpotifyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
 
   ) { 
 
@@ -38,8 +41,19 @@ export class MainScreenComponent implements OnInit {
    this.spotifyService.getTopArtists().then((data) => {
       this.myArtists = data
       this.topThreeArtists = this.myArtists.items.slice(0,3)
+      this.getRelatedArtists(this.topThreeArtists)
     })
 
+  }
+
+  async getRelatedArtists(topThreeArtists: any){
+    const artistId = topThreeArtists.map((element: { id: string; }) => element.id)
+    let listOfArtist: any[] = []
+  
+    artistId.forEach((artist: string) =>  this.spotifyService.getRelatedArtist(artist).then((data) => {
+      listOfArtist.push(data.artists.slice(0,3))
+    }))
+    this.topThreeRelatedArtist = listOfArtist
   }
 
   getTopTracks(){
@@ -49,8 +63,10 @@ export class MainScreenComponent implements OnInit {
     })
   }
 
-  playTrack(track:string){
-    this.spotifyService.playTrack(track)
+  playTrack(track:any){
+
+      this.spotifyService.playTrack(track)
+    
   }
 
 
@@ -59,5 +75,13 @@ export class MainScreenComponent implements OnInit {
       this.user = data
       this.image = this.user.images[0].url
     })
+  }
+
+  seeDetails(obj:any, type:string){
+    this.dialog.open(DetailsComponent, {
+      data: {
+        obj: obj,
+        type: type
+      }})
   }
 }
