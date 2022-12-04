@@ -24,6 +24,7 @@ export class SpotifyService {
   public myArtist: any
   public myTracks: any
   public relatedArtist: any
+  public audioFeatures: any
   spotify: Spotify.SpotifyWebApiJs = null;
   audio = new Audio();
 
@@ -108,4 +109,15 @@ async getRelatedArtist(artist_Id: string){
   this.relatedArtist = await this.spotify.getArtistRelatedArtists(artist_Id)
   return this.relatedArtist
 }
+
+async getTrackAudioFeatures(track: string){
+  this.audioFeatures = await this.spotify.getAudioFeaturesForTrack(track)
+  return this.audioFeatures
+}
+
+async getTrackAudioAnalysis(track: string){
+  this.audioFeatures = await this.spotify.getAudioAnalysisForTrack(track)
+  return this.audioFeatures
+}
+
 }
