@@ -1,6 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SpotifyService } from 'src/shared/services/spotify.service';
+
+import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexXAxis,ApexTitleSubtitle,ApexYAxis, ApexPlotOptions, ApexDataLabels} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+  yaxis: ApexYAxis;
+  plotOptions: ApexPlotOptions;
+  dataLabels: ApexDataLabels;
+}
 
 @Component({
   selector: 'app-details',
@@ -9,6 +21,11 @@ import { SpotifyService } from 'src/shared/services/spotify.service';
 })
 export class DetailsComponent implements OnInit {
   public trackInfo:any
+  public chartData: { name: string; data: any[]; }[];
+
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
     private dialog: MatDialog,
     public spotifyService: SpotifyService,
@@ -32,6 +49,61 @@ export class DetailsComponent implements OnInit {
   getTrackInfo(){
     this.spotifyService.getTrackAudioFeatures(this.data.obj.id).then((data) => {
       this.trackInfo = data
+      this.chartData = [
+        {
+          name: 'Energia',
+          data: this.trackInfo.energy
+        },
+        {
+          name: 'Dançabilidade',
+          data: this.trackInfo.danceability
+        },
+        {
+          name: 'Positividade',
+          data: this.trackInfo.valence
+        },
+        {
+          name: 'Acusticidade',
+          data: this.trackInfo.acousticness
+        },
+        {
+          name: 'Instrumentalidade',
+          data: this.trackInfo.instrumentalness
+        },
+        {
+          name: 'Vivacidade',
+          data: this.trackInfo.liveness
+        },
+        {
+          name: 'Falabilidade',
+          data: this.trackInfo.speechiness
+        }]
+        this.chartOptions = {
+          series: [
+            {
+              name:"0-1",
+              data: this.chartData.map((element) => element.data)
+            }
+          ],
+          chart: {
+            height: 350,
+            width: 350,
+            type: "radar",
+            toolbar: {
+              show: false
+            },
+          },
+          xaxis: {
+            categories: this.chartData.map((element) => element.name),
+          },
+          yaxis: {
+            labels: {
+              show: false
+            },
+          },
+
+        };
+
 
     })
   }

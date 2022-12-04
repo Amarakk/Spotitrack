@@ -12,6 +12,7 @@ import { LoginScreenComponent } from './pages/login-screen/login-screen.componen
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DetailsComponent } from '../shared/components/details/details.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DetailsComponent } from '../shared/components/details/details.component
     HttpClientModule,
     RouterModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

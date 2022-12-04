@@ -1,5 +1,7 @@
 <div *ngIf="data.type === 'track' "class="container">
-    <div class="profile">
+    <div class="wrap">
+
+        <div class="profile">
             <img class="artist-image modal-pic" src={{data.obj.album.images[0].url}}/>
             <h2>{{data.obj.name}}</h2>
             <h1>{{data.obj.artists[0].name}}</h1>
@@ -18,12 +20,15 @@
         <p>Popularidade: {{data.obj.popularity}}</p>
         <p>BPM: {{trackInfo.tempo}}</p>
         <p>Tempo: {{trackInfo.time_signature}}/4</p>
-    </div>
-    <div class="info">
-        <p>Dançabilidade: {{trackInfo.danceability}}</p>
-        <p>Energia: {{trackInfo.energy}}</p>
-        <p>Positividade: {{trackInfo.valence}}</p>
         <p>Audibilidade: {{trackInfo.loudness}} dB</p>
+    </div>
+</div>
+    <div class="chart">
+        <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+      ></apx-chart>
     </div>
    
 </div>
