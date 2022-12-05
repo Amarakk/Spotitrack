@@ -97,16 +97,22 @@ export class DetailsComponent implements OnInit {
             categories: this.chartData.map((element) => element.name),
           },
           yaxis: {
-            labels: {
-              show: false
-            },
+            show: false,
+            forceNiceScale: true ,
+            tickAmount: 4,
+            min: 0,
+            max: 1,
           },
-
+          plotOptions: {
+            radar: {
+              polygons: {
+                fill: {
+                    colors: ['#f8f8f8', '#fff']
+                }
+              }
+            }
+          }
         };
-
-
     })
   }
-
-
 }
