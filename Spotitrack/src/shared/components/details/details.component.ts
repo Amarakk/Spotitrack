@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SpotifyService } from 'src/shared/services/spotify.service';
 
-import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexXAxis,ApexTitleSubtitle,ApexYAxis, ApexPlotOptions, ApexDataLabels} from "ng-apexcharts";
+import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexXAxis,ApexTitleSubtitle,ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexResponsive} from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -12,6 +12,7 @@ export type ChartOptions = {
   yaxis: ApexYAxis;
   plotOptions: ApexPlotOptions;
   dataLabels: ApexDataLabels;
+  responsive: any;
 }
 
 @Component({
@@ -86,9 +87,11 @@ export class DetailsComponent implements OnInit {
             }
           ],
           chart: {
-            height: 350,
-            width: 350,
+            height: 400,
+            width: 400,
             type: "radar",
+           
+            redrawOnParentResize: true,
             toolbar: {
               show: false
             },
@@ -111,7 +114,12 @@ export class DetailsComponent implements OnInit {
                 }
               }
             }
-          }
+          },
+          responsive: [{
+            breakpoint: undefined,
+            options: {},
+            
+        }]
         };
     })
   }
