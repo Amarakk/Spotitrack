@@ -20,6 +20,7 @@ export class MainScreenComponent implements OnInit {
   public topThreeRelatedArtist: any;
   public myTracks: any;
   public topFiveTracks: any;
+  public period: any;
 
   constructor(
     public spotifyService: SpotifyService,
