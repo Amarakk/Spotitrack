@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/shared/services/spotify.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetailsComponent } from 'src/shared/components/details/details.component';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-main-screen',
@@ -19,6 +20,10 @@ export class MainScreenComponent implements OnInit {
   public topThreeArtists: any;
   public topThreeRelatedArtist: any;
   public myTracks: any;
+  public myRecommedantions: any
+  public options: SpotifyApi.RecommendationsOptionsObject
+  public seed_artists: any
+  public seed_tracks: any
   public topFiveTracks: any;
   public period: any;
 
@@ -42,9 +47,22 @@ export class MainScreenComponent implements OnInit {
    this.spotifyService.getTopArtists().then((data) => {
       this.myArtists = data
       this.topThreeArtists = this.myArtists.items.slice(0,3)
+      this.seed_artists = this.topThreeArtists.map((element: { id: string; }) => element.id)
       this.getRelatedArtists(this.topThreeArtists)
     })
 
+  }
+
+  async getRecommendations(){
+    this.options.seed_artists = this.seed_artists
+    this.options.seed_tracks = this.seed_tracks
+    console.log('???');
+    
+    this.spotifyService.getRecommendations(this.options).then((data) => {
+      let response = data
+      this.myRecommedantions = response.tracks.slice(0,5) 
+      console.log('?' + this.myRecommedantions);
+    })
   }
 
   async getRelatedArtists(topThreeArtists: any){
@@ -61,6 +79,7 @@ export class MainScreenComponent implements OnInit {
     this.spotifyService.getTopTracks().then((data) => {
       this.myTracks = data
       this.topFiveTracks = this.myTracks.items.slice(0,5)
+      this.seed_tracks = this.topFiveTracks.map((element: { id: string; }) => element.id)
     })
   }
 
