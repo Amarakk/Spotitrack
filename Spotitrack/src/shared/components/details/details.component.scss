@@ -31,6 +31,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 5px;
 }
 .related-wrapper{
     display: flex;
@@ -40,8 +41,14 @@
     overflow-y: hidden;
 }
 .related-artist{
-    margin: 10px auto;
+    background: linear-gradient(0deg, rgba(29, 185, 84, 0.7) 0%, rgba(231, 226, 226, 1) 18%);
+    margin: 10px 3px;
     width: 30%;
+
+}
+.artist-image{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 .profile{
     display: flex;
@@ -120,3 +127,33 @@ h2{
       transform: translate3d(85px,0,0);
     }
   }
+
+  .image-container{
+    position: relative;
+    display: flex;
+    &:hover{
+        cursor: pointer;
+        .play-button{
+            display: block;
+        }
+    }
+}
+
+
+.play-button{
+    position: absolute;
+    z-index: 100;
+    width: 100px;
+    height: 100px;
+    justify-items: center;
+    background-color: rgba(0,0,0,0.2);
+    text-align: center;
+    display: none;
+    .play-symbol{
+        width: 50px;
+        height: 50px;
+        margin-top: 25px;
+
+        fill: #f5f5f5;
+    }
+}

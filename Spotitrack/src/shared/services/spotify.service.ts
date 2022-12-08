@@ -23,6 +23,7 @@ export class SpotifyService {
   public myImage: any
   public myArtist: any
   public myTracks: any
+  public artistTopTracks: any
   public relatedArtist: any
   public audioFeatures: any
   public myRecommendations: SpotifyApi.RecommendationsFromSeedsResponse
@@ -42,14 +43,12 @@ export class SpotifyService {
 
 
 login(){
-  console.log(this.authEndpoint + this.clientId + this.redirect_uri + this.scopes + this.response_type)
   return(this.authEndpoint+this.clientId+this.redirect_uri+this.scopes+this.response_type)
 }
 
 getAccessToken(){
   if (window.location.hash) {
     const hash = window.location.hash.substring(1).split('&')
-    console.log(hash[0].split('=')[1])
     return(hash[0].split('=')[1])
   }
   else{
@@ -66,7 +65,6 @@ async getUsername(){
 }
 
 setAccessToken(token: string) {
-  console.log(token)
   this.spotify.setAccessToken(token);
   localStorage.setItem('token', token);
   }
@@ -77,28 +75,27 @@ async getAlbunsFromArtist(artist: string) {
 }
 
 
-async getTopArtists(){
+async getTopArtists(time_range: string){
   this.myArtist = await this.spotify.getMyTopArtists({
-    time_range: 'short_term',
+    time_range: time_range,
   })
   return this.myArtist
 }
 
-async getTopTracks(){
+async getTopTracks(time_range: string){
   this.myTracks = this.spotify.getMyTopTracks({
-    time_range: 'short_term',
+    time_range: time_range,
   })
   return this.myTracks
 }
 
 async playTrack(track:any){
   this.audio.pause();
+  this.spotify.pause();
     this.spotify.play({
       uris: [track.uri]
     }).then(() => {
-      console.log('Playing now!');
     }).catch((err) => {
-    console.log(err)
 
     this.audio.src = track.preview_url;
     this.audio.volume = 0.1;
@@ -125,4 +122,10 @@ async getRecommendations(options: SpotifyApi.RecommendationsOptionsObject){
   this.myRecommendations = await this.spotify.getRecommendations(options)
   return this.myRecommendations
 }
+
+async getArtistTopTracks(artist: string){
+  this.artistTopTracks = await this.spotify.getArtistTopTracks(artist, 'US')
+  return this.artistTopTracks
+}
+
 }
