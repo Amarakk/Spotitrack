@@ -21,7 +21,7 @@ export class MainScreenComponent implements OnInit {
   public topThreeRelatedArtist: any;
   public myTracks: any;
   public myRecommedantions: any
-  public options: SpotifyApi.RecommendationsOptionsObject
+  public options: any
   public seed_artists: any
   public seed_tracks: any
   public topFiveTracks: any;
@@ -41,6 +41,7 @@ export class MainScreenComponent implements OnInit {
     this.getUsername();
     this.getTopArtists();
     this.getTopTracks();
+    this.getRecommendations()
   }
 
   getTopArtists(){
@@ -54,14 +55,16 @@ export class MainScreenComponent implements OnInit {
   }
 
   async getRecommendations(){
-    this.options.seed_artists = this.seed_artists
-    this.options.seed_tracks = this.seed_tracks
-    console.log('???');
-    
-    this.spotifyService.getRecommendations(this.options).then((data) => {
+    let options = {
+      seed_artists: '0L8ExT028jH3ddEcZwqJJ5,6FBDaR13swtiWwGhX1WQsP,7GDDTwiPJnrechnyJ83BXb',
+      seed_tracks: '1sP4VgrC59urtEcshdEgb1,3nqm3DdVskqbHhmb8S8hMd,5SlKhaPcdIfSjpoM2QtM4C,10Nmj3JCNoMeBQ87uw5j8k,0aGQHMr7bc23Y9Ts84ffop'
+    } 
+    this.spotifyService.getRecommendations({seed_tracks: options.seed_tracks}).then((data) => {
       let response = data
       this.myRecommedantions = response.tracks.slice(0,5) 
-      console.log('?' + this.myRecommedantions);
+      console.log(this.myRecommedantions);
+      
+
     })
   }
 
