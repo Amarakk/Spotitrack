@@ -1,29 +1,55 @@
 <div *ngIf="data.type === 'track' "class="container">
-    <div class="profile">
-            <img class="artist-image" src={{data.obj.album.images[0].url}}/>
-            <h2>{{data.obj.name}}</h2>
-            <h1>{{data.obj.artists[0].name}}</h1>
+    <div class="wrap">
+            <div class="profile">
+                <img class="artist-image modal-pic" src={{data.obj.album.images[0].url}}/>
+                <h2>{{data.obj.name}}</h2>
+                <h1>{{data.obj.artists[0].name}}</h1>
+                
+        </div>
+        <div class="info">
+            <h1>Informações</h1>
+            <p>Álbum: {{data.obj.album.name}}</p>
+            <p>Data de lançamento: {{data.obj.album.release_date}}</p>
+            <p>Popularidade: {{data.obj.popularity}}</p>
+            <p>BPM: {{trackInfo.tempo}}</p>
+            <p>Tempo: {{trackInfo.time_signature}}/4</p>
+            <p>Audibilidade: {{trackInfo.loudness}} dB</p>
+        </div>
     </div>
-    <div class="info">
-        <h2>Álbum: {{data.obj.album.name}}</h2>
-        <h2>Data de lançamento: {{data.obj.album.release_date}}</h2>
-        <h2>Popularidade: {{data.obj.popularity}}</h2>
+    <div class="chart">
+        <apx-chart class="chart"
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [yaxis]="chartOptions.yaxis"
+        [xaxis]="chartOptions.xaxis"
+        [plotOptions]="chartOptions.plotOptions"
+      ></apx-chart>
     </div>
 </div>
 
 
 <div *ngIf="data.type === 'artist' "class="container">
-    <div class="profile">
-        <img class="artist-image" src={{data.obj[0].images[0].url}}/>
+    <div class="artist-profile">
+        <img class="artist-image modal-pic" src={{data.obj[0].images[0].url}}/>
         <h1>{{data.obj.name}}</h1>
-        <h2> Seguidores: {{data.obj[0].followers.total}}</h2>
-        <h2> Gênero: {{data.obj[0].genres}}</h2>
+        <h2> Seguidores: <span class="">{{data.obj[0].followers.total}}</span></h2>
+        <h2> {{data.obj[0].genres[0]}}</h2>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+              <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+              <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(29, 185, 84,0.7)" />
+              </g>
+        </svg>
     </div>
     <div class="related">
         <h2>Artistas Relacionados</h2>
-        <div *ngFor="let artist of data.obj[1]">
-            <img class="artist-image" src={{artist.images[0].url}}/>
-            <h2>{{artist.name}}</h2>
+        <div class="related-wrapper">
+            <div class="related-artist artist-profile" *ngFor="let artist of data.obj[1]">
+                <img class="artist-image" src={{artist.images[0].url}}/>
+                <h2>{{artist.name}}</h2>
+            </div>
         </div>
     </div>
 </div>

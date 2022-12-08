@@ -69,6 +69,16 @@
     text-align: center;    
 }
 
+.example-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  .slider{
+    margin: 8px;
+  }
+}
+
 
 .user-image{
     width: 100px;

@@ -6,6 +6,13 @@
         </div>
         
         <div class="display-info" >
+            <section class="example-section">
+                <mat-slider class="slider" [max]="2" [min]="0" [step]="1"> 
+                    <input matSliderThumb [(ngModel)]="period">
+                </mat-slider>
+              </section>
+          
+            
             <p class="subtitle"> Seus artistas mais ouvidos no último mês:</p>
             <div class="top-artist-container" *ngFor="let artist of topThreeArtists; index as i">
                 <img class="artist-image" src={{artist.images[0].url}}/>

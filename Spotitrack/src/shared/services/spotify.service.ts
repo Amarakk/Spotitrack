@@ -24,6 +24,8 @@ export class SpotifyService {
   public myArtist: any
   public myTracks: any
   public relatedArtist: any
+  public audioFeatures: any
+  public myRecommendations: SpotifyApi.RecommendationsFromSeedsResponse
   spotify: Spotify.SpotifyWebApiJs = null;
   audio = new Audio();
 
@@ -107,5 +109,20 @@ async playTrack(track:any){
 async getRelatedArtist(artist_Id: string){
   this.relatedArtist = await this.spotify.getArtistRelatedArtists(artist_Id)
   return this.relatedArtist
+}
+
+async getTrackAudioFeatures(track: string){
+  this.audioFeatures = await this.spotify.getAudioFeaturesForTrack(track)
+  return this.audioFeatures
+}
+
+async getTrackAudioAnalysis(track: string){
+  this.audioFeatures = await this.spotify.getAudioAnalysisForTrack(track)
+  return this.audioFeatures
+}
+
+async getRecommendations(options: SpotifyApi.RecommendationsOptionsObject){
+  this.myRecommendations = await this.spotify.getRecommendations(options)
+  return this.myRecommendations
 }
 }
