@@ -76,9 +76,26 @@
   align-items: center;
   .slider{
     margin: 8px;
+    fill : #333;
   }
 }
 
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background-color: rgba(29, 185, 84,0.7) !important;
+}
+
+::ng-deep.mat-slider-thumb-label {
+  background-color: rgba(29, 185, 84,0.7) !important;
+
+}
+
+::ng-deep.mat-slider-thumb {
+  background-color: rgba(29, 185, 84,0.7) !important;
+}
+
+::ng-deep .mat-slider-ticks {
+  background-color: rgba(29, 185, 84,0.7) !important;
+}
 
 .user-image{
     width: 100px;
@@ -202,4 +219,7 @@
 
         fill: #f5f5f5;
     }
+}
+.three{
+  background:radial-gradient(circle, rgba(69,184,93,0.5228466386554622) 13%, rgba(148,233,180,0.3) 39%);
 }

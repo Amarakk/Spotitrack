@@ -33,18 +33,25 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
     if(this.data.type == 'track'){
       this.getTrackInfo()
-      console.log(this.trackInfo)
     const audio = new Audio(this.data.obj.preview_url);
-    this.spotifyService.audio.pause();
-    audio.volume = 0.1;
-    audio.play();
+    this.spotifyService.playTrack(this.data.obj)
     this.dialog.afterAllClosed.subscribe(() => {
     audio.pause();
+    this.spotifyService.spotify.pause();
     })
+    } else {
+      this.playRandomTrackFromArtist(this.data.obj[0])
     }
+  }
+
+  playRandomTrackFromArtist(artist:any){
+    this.spotifyService.getArtistTopTracks(artist.id).then((data) => {
+      let tracks = data.tracks
+      let randomTrack = tracks[Math.floor(Math.random() * tracks.length)]
+      this.spotifyService.playTrack(randomTrack)
+    })
   }
 
   getTrackInfo(){

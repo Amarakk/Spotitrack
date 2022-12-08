@@ -30,7 +30,7 @@
 
 <div *ngIf="data.type === 'artist' "class="container">
     <div class="artist-profile">
-        <img class="artist-image modal-pic" src={{data.obj[0].images[0].url}}/>
+        <img class="artist-image modal-pic" (click)="playRandomTrackFromArtist(data.obj[0])" src={{data.obj[0].images[0].url}}/>
         <h1>{{data.obj.name}}</h1>
         <h2> Seguidores: <span class="">{{data.obj[0].followers.total}}</span></h2>
         <h2> {{data.obj[0].genres[0]}}</h2>
@@ -47,7 +47,8 @@
         <h2>Artistas Relacionados</h2>
         <div class="related-wrapper">
             <div class="related-artist artist-profile" *ngFor="let artist of data.obj[1]">
-                <img class="artist-image" src={{artist.images[0].url}}/>
+                
+                <img class="artist-image" (click)="playRandomTrackFromArtist(artist)" src={{artist.images[0].url}}/>
                 <h2>{{artist.name}}</h2>
             </div>
         </div>
