@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainScreenComponent } from './pages/main-screen/main-screen.component';
 import { LoginScreenComponent } from './pages/login-screen/login-screen.component';
 
+/* 
+  Aqui são inicializadas as rotas que serão utilizadas, juntamente com
+  a chamada dos componentes da Main e da Login contidos em
+  app/pages/
+*/
 const routes: Routes = [
   {
     path: '',

@@ -9,6 +9,12 @@ import { SpotifyConfiguration } from '../../environments/environment';
 import Spotify from 'spotify-web-api-js';
 
 
+/* Aqui são chamadas e instanciadas todas as chamadas HTTP necessárias para
+  o carregamento das informações fornecidas pela APP. Para a construcao das
+  chamadas, utilizamos a lib spotify-web-api-js
+  O nome das funções já indica o que está sendo feito
+*/
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +24,9 @@ export class SpotifyService {
   private redirect_uri= `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
   private scopes = `scope=${SpotifyConfiguration.scopes.join('%20')}&`; 
   private response_type = 'response_type=token&show_dialog=true&';
-  
+  /* Declaração das variáveis que serão retornadas quando
+  solicitadas
+  */
   public myName: any
   public myImage: any
   public myArtist: any

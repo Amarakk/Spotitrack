@@ -15,6 +15,10 @@ export type ChartOptions = {
   responsive: any;
 }
 
+/* Tais chamdas só são realizadas quando clicamos no ícone de algum artista
+  ou música.
+*/
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',

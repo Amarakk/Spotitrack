@@ -5,6 +5,11 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetailsComponent } from 'src/shared/components/details/details.component';
 import { of } from 'rxjs/internal/observable/of';
 
+/* Aqui iremos chamar a services/spotify.service.ts para montar
+  as chamadas. Ademais, iremos tratar os dados recebidos utilizando
+  funcoes do Javascript como map, slice, forEach.
+*/
+
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',
@@ -114,7 +119,9 @@ export class MainScreenComponent implements OnInit {
         type: type
       }})
   }
-
+  /* Funçao para mudar o período de tempo das buscas pelos dados
+    na API do Spotify
+  */
   changePeriod(period: any){
     if( period == 0){
       this.period = 'short_term'

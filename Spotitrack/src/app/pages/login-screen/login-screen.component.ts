@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/shared/services/spotify.service';
 import { ActivatedRoute, Router } from '@angular/router'
 
-
+/* Componetes angular para obter os tokens de autorizaçao da API. */
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
@@ -25,7 +25,7 @@ export class LoginScreenComponent implements OnInit {
     this.getToken()
 
   }
-
+/* apenas um teste */
   getAlbuns(){
     this.spotifyService.getAlbunsFromArtist("Metallica");
   }

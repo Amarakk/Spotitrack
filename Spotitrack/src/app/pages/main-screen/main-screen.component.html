@@ -1,3 +1,8 @@
+<!-- 
+    dentro da nossa página, conseguimos utilizar todas as variáveis
+    que foram chamadas dentro da main-screen.componets.ts
+    de maneira interativa.
+ -->
 <div class="container">
     <div class="page">
         <div class="profile-info">
@@ -14,6 +19,13 @@
           
             
             <p class="subtitle"> Seus artistas mais ouvidos {{timespan}}:</p>
+            <!-- em Angular, conseguimos utilizar laços de repeticoes
+                para criarmos divs interativas, sem precisar repetir código.
+                Nesse exemplo aqui, estamos fazendo um for para o objeto topThreeArtists
+                e salvando cada objeto dentro de artist. Assim, é possível utilizar
+                esse objeto na construcao da página, o qual contem informações sobre os
+                artistas.
+            -->
             <div class="top-artist-container" *ngFor="let artist of topThreeArtists; index as i">
                 <div class="image-container">
 
@@ -56,6 +68,8 @@
 
         <div class="display-info" >
             <p class="subtitle"> Suas músicas mais ouvidas {{timespan}} foram:</p>
+            <!-- Mesmo laço de repeticao, mas agora pegando o objeto topFiveTracks.
+            -->
             <div class="top-artist-container" *ngFor="let track of topFiveTracks">
                 <div class="image-container"> 
                     <div class="play-button" (click)="playTrack(track)">
