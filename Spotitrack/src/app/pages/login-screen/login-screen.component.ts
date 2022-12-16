@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/shared/services/spotify.service';
 import { ActivatedRoute, Router } from '@angular/router'
 
-
+/* Componetes angular para obter os tokens de autorizaçao da API. */
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
@@ -21,15 +21,12 @@ export class LoginScreenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
- 
+    // Verifica se o usuário já está logado
     this.getToken()
 
   }
 
-  getAlbuns(){
-    this.spotifyService.getAlbunsFromArtist("Metallica");
-  }
-  
+  //Função de login, que redireciona o usuário para a página de autorização da API do Spotify e retorna o token de acesso
   login(){
     window.location.href =  this.spotifyService.login();
   }

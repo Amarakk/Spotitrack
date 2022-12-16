@@ -15,6 +15,10 @@ export type ChartOptions = {
   responsive: any;
 }
 
+/* Tais chamdas só são realizadas quando clicamos no ícone de algum artista
+  ou música.
+*/
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -31,7 +35,8 @@ export class DetailsComponent implements OnInit {
     private dialog: MatDialog,
     public spotifyService: SpotifyService,
   ) { }
-
+  // Inicializa o modal, onde é feita a verificação se o tipo de dado é uma música ou artista, se for música, é chamada a função para gerar os gráficos de informações sobre a música,
+  // se for artista, é chamada a função para tocar uma música aleatória do artista
   ngOnInit(): void {
     if(this.data.type == 'track'){
       this.getTrackInfo()
@@ -45,7 +50,7 @@ export class DetailsComponent implements OnInit {
       this.playRandomTrackFromArtist(this.data.obj[0])
     }
   }
-
+  //função para tocar uma música aleatória do artista
   playRandomTrackFromArtist(artist:any){
     this.spotifyService.getArtistTopTracks(artist.id).then((data) => {
       let tracks = data.tracks
@@ -53,7 +58,7 @@ export class DetailsComponent implements OnInit {
       this.spotifyService.playTrack(randomTrack)
     })
   }
-
+  // Função para gerar os gráficos de informações sobre a música, como dançabilidade, positividade, etc.
   getTrackInfo(){
     this.spotifyService.getTrackAudioFeatures(this.data.obj.id).then((data) => {
       this.trackInfo = data

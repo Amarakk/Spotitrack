@@ -16,6 +16,9 @@ import { DetailsComponent } from '../shared/components/details/details.component
 import {NgApexchartsModule} from "ng-apexcharts";
 import {MatSliderModule} from '@angular/material/slider';
 
+// Neste arquivo são importados os módulos e componentes que serão utilizados na aplicação.
+// e todos os componentes e módulos que serão criados na aplicação devem ser declarados aqui
+
 @NgModule({
   declarations: [
     AppComponent,
