@@ -21,15 +21,12 @@ export class LoginScreenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
- 
+    // Verifica se o usuário já está logado
     this.getToken()
 
   }
-/* apenas um teste */
-  getAlbuns(){
-    this.spotifyService.getAlbunsFromArtist("Metallica");
-  }
-  
+
+  //Função de login, que redireciona o usuário para a página de autorização da API do Spotify e retorna o token de acesso
   login(){
     window.location.href =  this.spotifyService.login();
   }

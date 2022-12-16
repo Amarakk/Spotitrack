@@ -8,3 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Spotitrack';
 }
+// exportando a classe principal do projeto

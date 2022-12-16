@@ -16,8 +16,9 @@ import { of } from 'rxjs/internal/observable/of';
   styleUrls: ['./main-screen.component.scss']
 })
 export class MainScreenComponent implements OnInit {
+
+  // Variáveis que serão utilizadas no componente
   private code: any
-  public lista = [1,2,3,4,5,6,7,8,9,0]
   popupUrl: any;
   public user:any
   public image: any;
@@ -41,7 +42,7 @@ export class MainScreenComponent implements OnInit {
   ) { 
 
   }
-  
+  // Função de inicialização do componente, onde é settado o token do usuário e chamadas as funções para pegar os dados do usuário
   ngOnInit() {
     this.spotifyService.setAccessToken(localStorage.getItem('token'))
     this.getUsername();
@@ -49,7 +50,7 @@ export class MainScreenComponent implements OnInit {
     this.getTopTracks();
     
   }
-
+  // Função para pegar os top 3 artistas mais ouvidos do usuário
   getTopArtists(){
    this.spotifyService.getTopArtists(this.period).then((data) => {
       this.myArtists = data
@@ -59,7 +60,7 @@ export class MainScreenComponent implements OnInit {
     })
 
   }
-
+  // Função para pegar as recomendações de músicas baseadas nas 5 músicas mais ouvidas do usuário
   getRecommendations(){
     let options = {
       seed_tracks: this.myTracks.items.slice(0,5).map((element: { id: string; }) => element.id)
@@ -70,7 +71,7 @@ export class MainScreenComponent implements OnInit {
 
     })
   }
-
+  // Função para pegar os artistas relacionados aos 3 artistas mais ouvidos do usuário
   async getRelatedArtists(topThreeArtists: any){
     const artistId = topThreeArtists.map((element: { id: string; }) => element.id)
     let listOfArtist: any[] = []
@@ -80,7 +81,7 @@ export class MainScreenComponent implements OnInit {
     }))
     this.topThreeRelatedArtist = listOfArtist
   }
-
+  // Função para pegar as músicas mais tocadas do usuário
   getTopTracks(){
     this.spotifyService.getTopTracks(this.period).then((data) => {
       this.myTracks = data
@@ -89,7 +90,7 @@ export class MainScreenComponent implements OnInit {
       this.getRecommendations()
     })
   }
-
+  // Função para tocar uma música aleatória do artista
   playRandomTrackFromArtist(artist:any){
     this.spotifyService.getArtistTopTracks(artist.id).then((data) => {
       let tracks = data.tracks
@@ -98,20 +99,21 @@ export class MainScreenComponent implements OnInit {
     })
   }
 
+  // Função para tocar a música
   playTrack(track:any){
 
       this.spotifyService.playTrack(track)
     
   }
 
-
+  // Função para pegar o nome do usuário
   async getUsername(){
     this.spotifyService.getUsername().then((data) => {
       this.user = data
       this.image = this.user.images[0].url
     })
   }
-
+  // Função para abrir o dialog com os detalhes do artista
   seeDetails(obj:any, type:string){
     this.dialog.open(DetailsComponent, {
       data: {
