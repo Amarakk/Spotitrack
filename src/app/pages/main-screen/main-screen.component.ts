@@ -11,9 +11,10 @@ import { of } from 'rxjs/internal/observable/of';
 */
 
 @Component({
-  selector: 'app-main-screen',
-  templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.scss']
+    selector: 'app-main-screen',
+    templateUrl: './main-screen.component.html',
+    styleUrls: ['./main-screen.component.scss'],
+    standalone: false
 })
 export class MainScreenComponent implements OnInit {
 

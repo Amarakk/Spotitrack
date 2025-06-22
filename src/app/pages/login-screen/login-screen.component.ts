@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 /* Componetes angular para obter os tokens de autorizaçao da API. */
 @Component({
-  selector: 'app-login-screen',
-  templateUrl: './login-screen.component.html',
-  styleUrls: ['./login-screen.component.scss']
+    selector: 'app-login-screen',
+    templateUrl: './login-screen.component.html',
+    styleUrls: ['./login-screen.component.scss'],
+    standalone: false
 })
 export class LoginScreenComponent implements OnInit {
   private code: any
