@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/shared/services/spotify.service';
-import { MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailsComponent } from 'src/shared/components/details/details.component';
 import { of } from 'rxjs/internal/observable/of';
 
@@ -11,17 +11,17 @@ import { of } from 'rxjs/internal/observable/of';
 */
 
 @Component({
-    selector: 'app-main-screen',
-    templateUrl: './main-screen.component.html',
-    styleUrls: ['./main-screen.component.scss'],
-    standalone: false
+  selector: 'app-main-screen',
+  templateUrl: './main-screen.component.html',
+  styleUrls: ['./main-screen.component.scss'],
+  standalone: false
 })
 export class MainScreenComponent implements OnInit {
 
   // Variáveis que serão utilizadas no componente
   private code: any
   popupUrl: any;
-  public user:any
+  public user: any
   public image: any;
   public myArtists: any;
   public topThreeArtists: any;
@@ -35,12 +35,14 @@ export class MainScreenComponent implements OnInit {
   public period: any = 'short_term';
   public timespan: any = 'no último mês'
 
+  public defaultImage = '../../assets/spotify.png'
+
 
   constructor(
     public spotifyService: SpotifyService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-  ) { 
+  ) {
 
   }
   // Função de inicialização do componente, onde é settado o token do usuário e chamadas as funções para pegar os dados do usuário
@@ -49,50 +51,50 @@ export class MainScreenComponent implements OnInit {
     this.getUsername();
     this.getTopArtists();
     this.getTopTracks();
-    
+
   }
   // Função para pegar os top 3 artistas mais ouvidos do usuário
-  getTopArtists(){
-   this.spotifyService.getTopArtists(this.period).then((data) => {
+  getTopArtists() {
+    this.spotifyService.getTopArtists(this.period).then((data) => {
       this.myArtists = data
-      this.topThreeArtists = this.myArtists.items.slice(0,3)
+      this.topThreeArtists = this.myArtists.items.slice(0, 3)
       this.seed_artists = this.topThreeArtists.map((element: { id: string; }) => element.id)
       this.getRelatedArtists(this.topThreeArtists)
     })
 
   }
   // Função para pegar as recomendações de músicas baseadas nas 5 músicas mais ouvidas do usuário
-  getRecommendations(){
+  getRecommendations() {
     let options = {
-      seed_tracks: this.myTracks.items.slice(0,5).map((element: { id: string; }) => element.id)
-    } 
-    this.spotifyService.getRecommendations({seed_tracks: options.seed_tracks}).then((data) => {
+      seed_tracks: this.myTracks.items.slice(0, 5).map((element: { id: string; }) => element.id)
+    }
+    this.spotifyService.getRecommendations({ seed_tracks: options.seed_tracks }).then((data: any) => {
       let response = data
-      this.myRecommedations = response.tracks.slice(0,5) 
+      this.myRecommedations = response.content.slice(0, 5)
 
     })
   }
   // Função para pegar os artistas relacionados aos 3 artistas mais ouvidos do usuário
-  async getRelatedArtists(topThreeArtists: any){
+  async getRelatedArtists(topThreeArtists: any) {
     const artistId = topThreeArtists.map((element: { id: string; }) => element.id)
     let listOfArtist: any[] = []
-  
-    artistId.forEach((artist: string) =>  this.spotifyService.getRelatedArtist(artist).then((data) => {
-      listOfArtist.push(data.artists.slice(0,3))
+
+    artistId.forEach((artist: string) => this.spotifyService.getRelatedArtist(artist).then((data) => {
+      listOfArtist.push(data.artists.slice(0, 3))
     }))
     this.topThreeRelatedArtist = listOfArtist
   }
   // Função para pegar as músicas mais tocadas do usuário
-  getTopTracks(){
+  getTopTracks() {
     this.spotifyService.getTopTracks(this.period).then((data) => {
       this.myTracks = data
-      this.topFiveTracks = this.myTracks.items.slice(0,5)
+      this.topFiveTracks = this.myTracks.items.slice(0, 5)
       this.seed_tracks = this.topFiveTracks.map((element: { id: string; }) => element.id)
       this.getRecommendations()
     })
   }
   // Função para tocar uma música aleatória do artista
-  playRandomTrackFromArtist(artist:any){
+  playRandomTrackFromArtist(artist: any) {
     this.spotifyService.getArtistTopTracks(artist.id).then((data) => {
       let tracks = data.tracks
       let randomTrack = tracks[Math.floor(Math.random() * tracks.length)]
@@ -101,40 +103,41 @@ export class MainScreenComponent implements OnInit {
   }
 
   // Função para tocar a música
-  playTrack(track:any){
+  playTrack(track: any) {
 
-      this.spotifyService.playTrack(track)
-    
+    this.spotifyService.playTrack(track)
+
   }
 
   // Função para pegar o nome do usuário
-  async getUsername(){
+  async getUsername() {
     this.spotifyService.getUsername().then((data) => {
       this.user = data
       this.image = this.user.images[0].url
     })
   }
   // Função para abrir o dialog com os detalhes do artista
-  seeDetails(obj:any, type:string){
+  seeDetails(obj: any, type: string) {
     this.dialog.open(DetailsComponent, {
       data: {
         obj: obj,
         type: type
-      }})
+      }
+    })
   }
   /* Funçao para mudar o período de tempo das buscas pelos dados
     na API do Spotify
   */
-  changePeriod(period: any){
-    if( period == 0){
+  changePeriod(period: any) {
+    if (period == 0) {
       this.period = 'short_term'
       this.timespan = 'no último mês'
     }
-    if( period == 1){
+    if (period == 1) {
       this.period = 'medium_term'
       this.timespan = 'nos últimos 6 meses'
     }
-    if( period == 2){
+    if (period == 2) {
       this.period = 'long_term'
       this.timespan = 'de sempre'
     }

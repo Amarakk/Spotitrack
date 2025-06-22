@@ -108,10 +108,10 @@ de maneira interativa.
                 <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
               </svg>
             </div>
-            <img class="track-image"  src={{recommendation.album.images[0].url}}/>
+            <img class="track-image"  src={{defaultImage}}/>
           </div>
           <div class="top-artist-info">
-            <p class="artist-name" (click)="seeDetails(recommendation,'track')">{{recommendation.name}}</p>
+            <p class="artist-name" (click)="seeDetails(recommendation,'track')">{{recommendation.trackTitle}}</p>
             <p class="artist-genre">{{recommendation.artists[0].name}}</p>
           </div>
           <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">

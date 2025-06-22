@@ -7,14 +7,15 @@ export const environment = {
 };
 
 export const SpotifyConfiguration = {
-  clientId: '48c11a4c27874137bf970a2fd475cd9d',
+  clientId: 'b9fa12fc25ed482290cc99be869a9089',
   authEndpoint: 'https://accounts.spotify.com/authorize',
-  redirectUrl: 'https://localhost:8080/',
+  redirectUrl: 'http://localhost:4200/',
   scopes: [
     "user-modify-playback-state", // alterar do player do usuario.
     "app-remote-control", // controle remoto
     "streaming", // streaming
     "user-top-read", // ler top artistas e musicas
+    
   ]
 }
 /*

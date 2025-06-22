@@ -3,7 +3,7 @@ export const environment = {
 };
 
 export const SpotifyConfiguration = {
-  clientId: '48c11a4c27874137bf970a2fd475cd9d',
+  clientId: 'b9fa12fc25ed482290cc99be869a9089',
   authEndpoint: 'https://accounts.spotify.com/authorize',
   redirectUrl: 'https://spotitrack-app.herokuapp.com/',
   scopes: [
