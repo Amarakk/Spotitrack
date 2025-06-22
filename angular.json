@@ -71,10 +71,10 @@
           "options":{},
           "configurations": {
             "production": {
-              "browserTarget": "Spotitrack:build:production"
+              "buildTarget": "Spotitrack:build:production"
             },
             "development": {
-              "browserTarget": "Spotitrack:build:development"
+              "buildTarget": "Spotitrack:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Spotitrack:build"
+            "buildTarget": "Spotitrack:build"
           }
         },
         "test": {
