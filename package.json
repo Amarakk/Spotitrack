@@ -16,12 +16,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^20.0.4",
-    "@angular/cdk": "^19.2.18",
+    "@angular/cdk": "^20.0.3",
     "@angular/common": "^20.0.4",
     "@angular/compiler": "^20.0.4",
-    "@angular/core": "^19.2.14",
+    "@angular/core": "^20.0.4",
     "@angular/forms": "^20.0.4",
-    "@angular/material": "^19.2.18",
+    "@angular/material": "^20.0.3",
     "@angular/platform-browser": "^20.0.4",
     "@angular/platform-browser-dynamic": "^20.0.4",
     "@angular/router": "^20.0.4",
@@ -35,8 +35,8 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.15",
-    "@angular/cli": "~19.2.15",
+    "@angular/build": "^20.0.3",
+    "@angular/cli": "~20.0.3",
     "@angular/compiler-cli": "^20.0.4",
     "@types/jasmine": "~4.0.0",
     "angular-cli-ghpages": "^1.0.3",

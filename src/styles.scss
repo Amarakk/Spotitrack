@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '@angular/material/theming';
-$custom-typography: mat-typography-config(
-  $font-family: 'Montserrat'
-);
+@use '@angular/material' as mat;
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Montserrat'
+// );
 
-@include angular-material-typography($custom-typography);
+// @include angular-material-typography($custom-typography);
 
 
 html, body { height: 100%; }
